@@ -19,14 +19,16 @@ fs
   })
   .forEach(function(file) {
     var model = sequelize.import(path.join(__dirname, file));
+    console.log(model);
     db[model.name] = model;
   });
-
+console.log(db);
 Object.keys(db).forEach(function(modelName) {
   if ("associate" in db[modelName]) {
     db[modelName].associate(db);
   }
 });
+sequelize.sync();
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

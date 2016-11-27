@@ -1,17 +1,20 @@
 {
   "development": {
-    "dialect": "sqlite",
-    "storage": "./db.development.sqlite"
+    "dialect": "mysql",
+    "username": "bmgg358",
+    "password": null,
+    "database": "c9"
   },
   "test": {
-    "dialect": "sqlite",
-    "storage": ":memory:"
+    "dialect": "mysql",
+    "username": "bmgg358",
+    "password": null,
+    "database": "c9"
   },
   "production": {
-    "username": "root",
+    "dialect": "mysql",
+    "username": "bmgg358",
     "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "database": "c9"
   }
 }

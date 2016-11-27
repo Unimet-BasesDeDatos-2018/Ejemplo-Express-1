@@ -4,26 +4,42 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var exphbs = require('express-handlebars');
 
 var routes = require('./routes/index');
 var users  = require('./routes/users');
+var personas  = require('./routes/personas');
+var apuestas  = require('./routes/apuestas');
 
 var app = express();
-
+var hbsHelpers = require('./lib/helpers/handlebars');
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(__dirname + '/public/favicon.ico'));
+var hbs = exphbs.create({
+  defaultLayout: 'main',
+  layoutsDir: path.join(__dirname, 'views', 'layouts'),
+  partialsDir: path.join(__dirname, 'views', 'partials'),
+  extname: '.hbs',
+  helpers: {
+    apostadores: hbsHelpers.apostadores
+  }
+});
+
+app.engine('.hbs', hbs.engine);
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', '.hbs');
+
+app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
+//app.use('/', routes);
 app.use('/users', users);
+app.use('/personas', personas);
+app.use('/', apuestas);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

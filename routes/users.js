@@ -2,6 +2,18 @@ var models  = require('../models');
 var express = require('express');
 var router  = express.Router();
 
+router.get('/', function(req, res) {
+  models.User.findAll().then(function(result) {
+    res.send(result);
+  });
+});
+
+router.get('/tasks', function(req, res) {
+  models.Task.findAll({include:[{all:true}]}).then(function(result) {
+    res.send(result);
+  });
+});
+
 router.post('/create', function(req, res) {
   models.User.create({
     username: req.body.username

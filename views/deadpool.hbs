@@ -1,0 +1,72 @@
+<br/>
+<div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">Crear Usuarios</div>
+      <form id="addUsuario" action="#" class="container-fluid">
+        <div class="form-group">
+          <label for="Nombre">Nombre</label>
+          <input type="text" class="form-control" id="Nombre">
+          <label for="Apellido">Apellido</label>
+          <input type="text" class="form-control" id="Apellido">
+          <label for="Cedula">Cédula</label>
+          <input type="number" class="form-control" min=0 id="Cedula">
+          <br/>
+          <input type="submit" class="btn btn-primary">
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">Apostar</div>
+      <form id="addApuesta" action="#" class="container-fluid">
+        <div class="form-group">
+          <label for="Objetivo">Objetivo</label>
+          <input type="text" class="form-control" id="Objetivo" disabled>
+          <label for="Apostador">Apostador</label>
+          <input type="text" class="form-control" id="Apostador" disabled>
+          <label for="Monto">Monto</label>
+          <input type="number" class="form-control" min=0 id="Monto" value=100>
+          <label for="Resultado">Resultado</label>
+          <input type="number" class="form-control" min=0 id="Resultado" value=10>
+          <br/>
+          <input type="submit" class="btn btn-primary">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading"> Usuarios </div>
+      <table class="table" id="usuarios">
+        <tr>
+          <th> Nombre </th>
+          <th> Apellido </th>
+          <th> Cedula </th>
+          <th></th>
+        </tr>
+      </table>
+      </div>
+  </div>
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">Apuestas actuales</div>
+      <!-- Table -->
+      <table class="table">
+        <tr>
+            <th>Apostador</th>
+            <th>Objetivo</th>
+            <th>Monto</th>
+            <th>Resultado</th>
+            <th></th>
+        </tr>
+        {{#apostadores apuestas}}
+        {{/apostadores}}
+      </table>
+    </div>
+  </div>
+</div>
+<script src="/js/deadpool.js"> </script>
