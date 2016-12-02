@@ -17,11 +17,9 @@ module.exports = (sequelize, DataTypes) => {
       classMethods: {
         associate: (models) => {
           Apuesta.belongsTo(models.Persona, {
-              onDelete: "CASCADE",
               as: 'apostador'
           });
           Apuesta.belongsTo(models.Persona, {
-              onDelete: "CASCADE",
               as: 'objetivo'
           });
         }
