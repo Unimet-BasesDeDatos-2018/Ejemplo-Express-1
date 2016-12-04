@@ -2,7 +2,7 @@
   {
     "type": "post",
     "url": "/apuestas",
-    "title": "Crea Apuesta",
+    "title": "2. Crea Apuesta",
     "name": "CreateApuesta",
     "group": "Apuestas",
     "parameter": {
@@ -12,14 +12,14 @@
             "group": "Parameter",
             "type": "Number",
             "optional": false,
-            "field": "apostador_id",
+            "field": "apostadorId",
             "description": "<p>Id de la persona Apostador.</p>"
           },
           {
             "group": "Parameter",
             "type": "Number",
             "optional": false,
-            "field": "objetivo_id",
+            "field": "objetivoId",
             "description": "<p>Id de la persona Objetivo.</p>"
           },
           {
@@ -37,17 +37,64 @@
             "description": "<p>Cantidad apostada.</p>"
           }
         ]
-      }
+      },
+      "examples": [
+        {
+          "title": "Ejemplo:",
+          "content": "{\n  \"apostadorId\":1,\n  \"objetivoId\":2,\n  \"resultado\":10,\n  \"apuesta\":100\n}",
+          "type": "json"
+        }
+      ]
     },
+    "sampleRequest": [
+      {
+        "url": "https://deadpool-ejemplo.herokuapp.com/apuestas"
+      }
+    ],
     "success": {
       "fields": {
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "String",
+            "type": "Number",
             "optional": false,
-            "field": "Body",
-            "description": ""
+            "field": "apostadorId",
+            "description": "<p>Id de la persona Apostador.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "objetivoId",
+            "description": "<p>Id de la persona Objetivo.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "resultado",
+            "description": "<p>Valor esperado.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "apuesta",
+            "description": "<p>Cantidad apostada.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Date",
+            "optional": false,
+            "field": "updatedAt",
+            "description": "<p>Actualización.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Date",
+            "optional": false,
+            "field": "createdAt",
+            "description": "<p>Creación.</p>"
           }
         ]
       }
@@ -58,8 +105,8 @@
   },
   {
     "type": "delete",
-    "url": "/:id",
-    "title": "Borra Apuesta dado ID",
+    "url": "/apuestas/:id",
+    "title": "3. Borra Apuesta dado ID",
     "name": "DeleteApuesta",
     "group": "Apuestas",
     "success": {
@@ -67,22 +114,27 @@
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "String",
+            "type": "Numbre",
             "optional": false,
-            "field": "adios.",
-            "description": ""
+            "field": "Number",
+            "description": "<p>Cantidad de casillas borradas.</p>"
           }
         ]
       }
     },
     "version": "0.0.0",
     "filename": "routes/apuestas.js",
-    "groupTitle": "Apuestas"
+    "groupTitle": "Apuestas",
+    "sampleRequest": [
+      {
+        "url": "https://deadpool-ejemplo.herokuapp.com/apuestas/:id"
+      }
+    ]
   },
   {
     "type": "get",
-    "url": "/",
-    "title": "Get todas las Apuestas",
+    "url": "/apuestas",
+    "title": "1. Get todas las Apuestas",
     "name": "GetApuestas",
     "group": "Apuestas",
     "success": {
@@ -90,36 +142,57 @@
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "String",
+            "type": "Number",
             "optional": false,
-            "field": "Nombre",
+            "field": "apostador.Nombre",
             "description": "<p>Nombre del Apostador.</p>"
           },
           {
             "group": "Success 200",
             "type": "Number",
             "optional": false,
-            "field": "Monto",
-            "description": "<p>Mondo apostado.</p>"
+            "field": "objetivo.Nombre",
+            "description": "<p>Nombre del Objetivo.</p>"
           },
           {
             "group": "Success 200",
             "type": "Number",
             "optional": false,
-            "field": "Apuesta",
+            "field": "resultado",
+            "description": "<p>Resultado esperado.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "monto",
             "description": "<p>Cantidad apostada.</p>"
           }
         ]
       }
     },
+    "parameter": {
+      "examples": [
+        {
+          "title": "Ejemplo:",
+          "content": "[{\n  \"monto\":100,\n  \"resultado\":10,\n  \"apostador\":{\n    \"nombre\":\"bernardo\"\n  },\n  \"objetivo\":{\n    \"nombre\":\"hola\"\n  }\n }]",
+          "type": "json"
+        }
+      ]
+    },
     "version": "0.0.0",
     "filename": "routes/apuestas.js",
-    "groupTitle": "Apuestas"
+    "groupTitle": "Apuestas",
+    "sampleRequest": [
+      {
+        "url": "https://deadpool-ejemplo.herokuapp.com/apuestas"
+      }
+    ]
   },
   {
     "type": "post",
-    "url": "/",
-    "title": "Crea Persona",
+    "url": "/personas",
+    "title": "2. Crea Persona",
     "name": "CreatePersona",
     "group": "Personas",
     "parameter": {
@@ -147,7 +220,14 @@
             "description": "<p>Apellido de la Persona.</p>"
           }
         ]
-      }
+      },
+      "examples": [
+        {
+          "title": "{",
+          "content": "{\n  \"id\": 1,\n  \"apellido\": \"garcia\",\n  \"nombre\": \"bernardo\",\n  \"cedula\": 1,\n  \"createdAt\": \"2016-12-04T02:30:57.000Z\",\n  \"updatedAt\": \"2016-12-04T02:30:57.000Z\"\n}",
+          "type": "json"
+        }
+      ]
     },
     "success": {
       "fields": {
@@ -156,8 +236,8 @@
             "group": "Success 200",
             "type": "Number",
             "optional": false,
-            "field": "ID",
-            "description": "<p>id de la persona.</p>"
+            "field": "id",
+            "description": "<p>Id de la persona.</p>"
           },
           {
             "group": "Success 200",
@@ -171,26 +251,45 @@
             "type": "String",
             "optional": false,
             "field": "nombre",
-            "description": "<p>nombre.</p>"
+            "description": "<p>Nombre de la Persona.</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
             "field": "apellido",
-            "description": "<p>apellido.</p>"
+            "description": "<p>Apellido de la Persona.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Date",
+            "optional": false,
+            "field": "updatedAt",
+            "description": "<p>Actualización.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Date",
+            "optional": false,
+            "field": "createdAt",
+            "description": "<p>Creación.</p>"
           }
         ]
       }
     },
     "version": "0.0.0",
     "filename": "routes/personas.js",
-    "groupTitle": "Personas"
+    "groupTitle": "Personas",
+    "sampleRequest": [
+      {
+        "url": "https://deadpool-ejemplo.herokuapp.com/personas"
+      }
+    ]
   },
   {
     "type": "delete",
-    "url": "/:id",
-    "title": "Borra Persona dado ID",
+    "url": "/personas/:id",
+    "title": "3. Borra Persona dado ID",
     "name": "DeletePersonas",
     "group": "Personas",
     "success": {
@@ -198,39 +297,93 @@
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "String",
+            "type": "Numbre",
             "optional": false,
-            "field": "adios",
-            "description": "<p>.</p>"
+            "field": "Number",
+            "description": "<p>Cantidad de casillas borradas.</p>"
           }
         ]
       }
     },
     "version": "0.0.0",
     "filename": "routes/personas.js",
-    "groupTitle": "Personas"
+    "groupTitle": "Personas",
+    "sampleRequest": [
+      {
+        "url": "https://deadpool-ejemplo.herokuapp.com/personas/:id"
+      }
+    ]
   },
   {
     "type": "get",
-    "url": "/",
-    "title": "Get all Personas",
+    "url": "/personas",
+    "title": "1. Get all Personas",
     "name": "GetPersonas",
     "group": "Personas",
+    "parameter": {
+      "examples": [
+        {
+          "title": "Ejemplo:",
+          "content": "[{\n  \"id\": 1,\n  \"apellido\": \"garcia\",\n  \"nombre\": \"bernardo\",\n  \"cedula\": 1,\n  \"createdAt\": \"2016-12-04T02:30:57.000Z\",\n  \"updatedAt\": \"2016-12-04T02:30:57.000Z\"\n}]",
+          "type": "json"
+        }
+      ]
+    },
     "success": {
       "fields": {
         "Success 200": [
           {
             "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Id de la persona.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "cedula",
+            "description": "<p>cedula de la persona.</p>"
+          },
+          {
+            "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "Nombre",
-            "description": "<p>Apellido de la persona.</p>"
+            "field": "nombre",
+            "description": "<p>Nombre de la Persona.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "apellido",
+            "description": "<p>Apellido de la Persona.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Date",
+            "optional": false,
+            "field": "updatedAt",
+            "description": "<p>Actualización.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Date",
+            "optional": false,
+            "field": "createdAt",
+            "description": "<p>Creación.</p>"
           }
         ]
       }
     },
     "version": "0.0.0",
     "filename": "routes/personas.js",
-    "groupTitle": "Personas"
+    "groupTitle": "Personas",
+    "sampleRequest": [
+      {
+        "url": "https://deadpool-ejemplo.herokuapp.com/personas"
+      }
+    ]
   }
 ]

@@ -4,10 +4,24 @@ var models = require('../models');
 var Persona = models.Persona;
 
 /**
-* @api {get} / Get all Personas
+* @api {get} /personas 1. Get all Personas
 * @apiName GetPersonas
 * @apiGroup Personas
-* @apiSuccess {String} Nombre Apellido de la persona.
+* @apiParamExample {json} Ejemplo:
+* [{
+*   "id": 1,
+*   "apellido": "garcia",
+*   "nombre": "bernardo",
+*   "cedula": 1,
+*   "createdAt": "2016-12-04T02:30:57.000Z",
+*   "updatedAt": "2016-12-04T02:30:57.000Z"
+* }]
+* @apiSuccess {Number} id Id de la persona.
+* @apiSuccess {Number} cedula cedula de la persona.
+* @apiSuccess {String} nombre Nombre de la Persona.
+* @apiSuccess {String} apellido Apellido de la Persona.
+* @apiSuccess {Date} updatedAt Actualización.
+* @apiSuccess {Date} createdAt Creación.
 */
 router.get('/', (req, res, next) => {
   Persona.findAll().then((result) => {
@@ -16,10 +30,11 @@ router.get('/', (req, res, next) => {
 });
 
 /**
-* @api {delete} /:id Borra Persona dado ID
+* @api {delete} /personas/:id 3. Borra Persona dado ID
 * @apiName DeletePersonas
 * @apiGroup Personas
-* @apiSuccess {String} adios .
+* 
+* @apiSuccess {Numbre} Number Cantidad de casillas borradas.
 */
 router.delete('/:id', function(req, res, next) {
   Persona.destroy({
@@ -31,17 +46,30 @@ router.delete('/:id', function(req, res, next) {
   });
 });
 /**
-* @api {post} / Crea Persona
+* @api {post} /personas 2. Crea Persona
 * @apiName CreatePersona
 * @apiGroup Personas
 * 
 * @apiParam {Number} cedula Cédula de la Persona.
 * @apiParam {String} nombre Nombre de la Persona.
 * @apiParam {String} apellido Apellido de la Persona.
-* @apiSuccess {Number} ID id de la persona.
+* 
+* @apiSuccess {Number} id Id de la persona.
 * @apiSuccess {Number} cedula cedula de la persona.
-* @apiSuccess {String} nombre nombre.
-* @apiSuccess {String} apellido apellido.
+* @apiSuccess {String} nombre Nombre de la Persona.
+* @apiSuccess {String} apellido Apellido de la Persona.
+* @apiSuccess {Date} updatedAt Actualización.
+* @apiSuccess {Date} createdAt Creación.
+* 
+* @apiParamExample {json}
+* {
+*   "id": 1,
+*   "apellido": "garcia",
+*   "nombre": "bernardo",
+*   "cedula": 1,
+*   "createdAt": "2016-12-04T02:30:57.000Z",
+*   "updatedAt": "2016-12-04T02:30:57.000Z"
+* }
 */
 router.post('/', (req, res, next) => {
   Persona.create(req.body).then((result)=>{

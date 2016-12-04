@@ -17,10 +17,20 @@ module.exports = (sequelize, DataTypes) => {
       classMethods: {
         associate: (models) => {
           Apuesta.belongsTo(models.Persona, {
-              as: 'apostador'
+            onDelete: "CASCADE",
+            onUpdate: "CASCADE",
+            as: 'apostador',
+            foreignKey: {
+              allowNull: false
+            }
           });
           Apuesta.belongsTo(models.Persona, {
-              as: 'objetivo'
+            onDelete: "CASCADE",
+            onUpdate: "CASCADE",
+            as: 'objetivo',
+            foreignKey: {
+              allowNull: false
+            }
           });
         }
       }

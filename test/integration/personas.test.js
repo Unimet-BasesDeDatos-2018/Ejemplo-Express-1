@@ -7,15 +7,15 @@ var request  = require('supertest');
 
 describe('página de creación de personas', function () {
   before(function () {
-      return require('../../models').sequelize.sync({'force': true});
+      return require('../../models').sequelize.sync({force: true});
   });
   
   beforeEach(function () {
     this.models = require('../../models');
-    
+    console.log('asd');
     return Bluebird.all([
-      this.models.Apuesta.destroy({truncate:true}),
-      this.models.Persona.destroy({truncate:true})
+      this.models.Persona.destroy({truncate:true}),
+      this.models.Apuesta.destroy({truncate:true})
     ]);
   });
 

@@ -3,5 +3,6 @@
   "version": "0.0.1",
   "description": "Métodos públicos",
   "title": "Deadpool ApiDoc",
-  "url" : "https://unimet-deadpool-bmgg358.c9users.io"
+  "url" : "https://deadpool-ejemplo.herokuapp.com",
+  "sampleUrl":"https://deadpool-ejemplo.herokuapp.com"
 }
