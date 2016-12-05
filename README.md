@@ -1,35 +1,31 @@
-# Express Example
+# Ejemplo Deadpool
 
-This repository demonstrates the usage of Sequelize within an [Express](https://expressjs.com) application.
-The implemented logic is a simple task tracking tool.
+Proyecto creado con NodeJS, Express, Sequelize, y Handlebars. Que pueden utilizar como plantilla para sus proyectos.
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
-## Starting App
+## Iniciar App
 
 ```
 npm install
 npm start
 ```
 
-This will start the application and create an sqlite database in your app dir.
-Just open [http://localhost:3000](http://localhost:3000).
+Una vez instalada las dependencias, e iniciado el servidor
+Solo abra [http://localhost:3000](http://localhost:3000).
+(si tiene configurado el ambiente de node con un puerto específico, tendrá que utilizar el puerto asignado para acceder).
 
-## Running Tests
+## Pruebas 
+### Pendiente
+Pruebas utilizando [Mocha](https://mochajs.org). Ejecute usando `npm test-mocha`
+### Pendiente
+Pruebas utilizando [Jasmine](https://jasmine.github.io/2.5/introduction). Ejecute usando `npm test-jasmine`
 
-We have added some [Mocha](https://mochajs.org) based test. You can run them by `npm test`
-
-
-## Setup in Details
-
-In order to understand how this application has been built, you can find the
-executed steps in the following snippet. You should be able to adjust those
-steps according to your needs. Please note that the view and the routes aren't
-described. You can find those files in the repo.
+## Configuración
 
 #### Express Setup
 
-First we will create a bare Express App using `express-generator` [Express Generator](https://expressjs.com/en/starter/generator.html)
+Crear un aplicación base con `express-generator` [Express Generator](https://expressjs.com/en/starter/generator.html)
 ```bash
 # install express generator globally
 npm install -g express-generator
@@ -43,33 +39,42 @@ express -f
 npm install
 ```
 
-#### Sequelize Setup
-
-Now we will install all sequelize related modules.
+#### Configuración de Sequelize
 
 ```bash
 # install ORM , CLI and SQLite dialect
-npm install --save sequelize sequelize-cli sqlite3
+npm install --save sequelize sqlite3
+npm install -g sequelize-cli
 
 # generate models
 node_modules/.bin/sequelize init
-node_modules/.bin/sequelize model:create --name User --attributes username:string
-node_modules/.bin/sequelize model:create --name Task --attributes title:string
+sequelize model:create --name Apuesta --attributes resultado:number,monto:number
+sequelize model:create --name Persona --attributes apellido:string,nombre:string,cedula:number
 ```
 
-You will now have a basic express application with some additional directories
-(config, models, migrations). Also you will find two migrations and models.
-One for the `User` and one for the `Task`.
-
-In order to associate the models with each other, you need to change the models
-like this:
+Utilizando los modelos creados agregar relaciones
 
 ```js
-// task.js
+// apuesta.js
 // ...
 classMethods: {
   associate: function(models) {
-    Task.belongsTo(models.User);
+    Apuesta.belongsTo(models.Persona, {
+      onDelete: "CASCADE",
+      onUpdate: "CASCADE",
+      as: 'apostador',
+      foreignKey: {
+        allowNull: false
+      }
+    });
+    Apuesta.belongsTo(models.Persona, {
+      onDelete: "CASCADE",
+      onUpdate: "CASCADE",
+      as: 'objetivo',
+      foreignKey: {
+        allowNull: false
+      }
+    });
   }
 }
 // ...

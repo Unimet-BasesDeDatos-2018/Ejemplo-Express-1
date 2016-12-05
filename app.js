@@ -5,15 +5,14 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var exphbs = require('express-handlebars');
-
+// dependencias locales
+var hbsHelpers = require('./lib/helpers/handlebars');
 var routes = require('./routes/index');
 var personas  = require('./routes/personas');
 var apuestas  = require('./routes/apuestas');
 
 var app = express();
-var hbsHelpers = require('./lib/helpers/handlebars');
-// view engine setup
-
+// view engine config
 var hbs = exphbs.create({
   defaultLayout: 'main',
   layoutsDir: path.join(__dirname, 'views', 'layouts'),
@@ -23,11 +22,11 @@ var hbs = exphbs.create({
     apostadores: hbsHelpers.apostadores
   }
 });
-
+// View Engine setup
 app.engine('.hbs', hbs.engine);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', '.hbs');
-
+// Server config
 app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -35,6 +34,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Rutas
 app.use('/', routes);
 app.use('/personas', personas);
 app.use('/apuestas', apuestas);
